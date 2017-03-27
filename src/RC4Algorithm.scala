@@ -11,8 +11,9 @@ class RC4Algorithm(key:String) {
   initialization()
   sPermutation()
 
-  def encryption(plaintext: String): Unit = {
+  def encryption(plaintext: String): String = {
     var i = 0; var j = 0; var k = 0; var t = 0; var counter = 0
+    var ciphertext = ""
     while ( counter < plaintext.length ) {
       i = (i + 1) & 0xFF
       j = (j + sArray(i)) & 0xFF
@@ -21,10 +22,13 @@ class RC4Algorithm(key:String) {
       sArray(j) = temp
       t = (sArray(i) + sArray(j)) & 0xFF
       k = sArray(t)
-      println(Integer.toString(plaintext(counter).toByte ^ k, 16))
 
-      counter += 1; counter - 1
+      ciphertext += "00" + Integer.toString(plaintext(counter).toByte ^ k, 16) takeRight 2
+
+      counter += 1
     }
+
+    ciphertext
   }
 
 
@@ -53,6 +57,6 @@ class RC4Algorithm(key:String) {
 object default {
   def main(args: Array[String]): Unit = {
     val rc4 = new RC4Algorithm("ABCD")
-    rc4.encryption("Hello World")
+    print(rc4.encryption("Hello World"))
   }
 }
