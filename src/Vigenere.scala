@@ -17,10 +17,19 @@ object Vigenere {
       if(encrypt) {
         result += alphabet((a + b) % 26 )
       } else {
-        result += alphabet(abs((a - b) % 26))
+        var modulo = (a - b) % 26
+        if(modulo < 0) {
+          modulo += 26
+        }
+        result += alphabet(modulo)
       }
     }
 
     result
+  }
+
+  def main(args: Array[String]): Unit = {
+    println(Vigenere.decryptEncrypt("LEMON","ATTACKATDAWN", encrypt = true))
+    println(Vigenere.decryptEncrypt("LEMON","LXFOPVEFRNHR", encrypt = false))
   }
 }
