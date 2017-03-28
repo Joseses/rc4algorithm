@@ -87,5 +87,6 @@ object default {
     val rc4 = new RC4Algorithm("ABCD")
     //println(rc4.encryption("Hello World"))
     print(rc4.decryption("700196db60f45629a54046"))
+    //jojoj
   }
 }
