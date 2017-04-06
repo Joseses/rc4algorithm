@@ -9,10 +9,9 @@ class RC4Algorithm(key:Array[Int], arr: Array[Int]) {
 
   def this(key: String) = this(key.map(_.toInt).toArray, new Array[Int](256))
 
-  initialization()
-  sPermutation()
-
   def encryption(plaintext: String): String = {
+    initialization()
+    sPermutation()
     var i = 0; var j = 0; var k = 0; var t = 0; var counter = 0
     var ciphertext = ""
     while ( counter < plaintext.length ) {
@@ -32,6 +31,8 @@ class RC4Algorithm(key:Array[Int], arr: Array[Int]) {
   }
 
   def decryption(ciphertext: String): String = {
+    initialization()
+    sPermutation()
     var i = 0; var j = 0; var k = 0; var t = 0; var counter = 0
     var plaintext = ""
 
@@ -81,15 +82,13 @@ class RC4Algorithm(key:Array[Int], arr: Array[Int]) {
 object default {
   def main(args: Array[String]): Unit = {
     val rc4 = new RC4Algorithm("ABCD")
-    val rc4D = new RC4Algorithm("ABCD")
     println(rc4.encryption("Hello World"))
-    println(rc4D.decryption("700196db60f45629a54046"))
+    println(rc4.decryption("700196db60f45629a54046"))
 
     val rc42 = new RC4Algorithm(Array(2, 5), Array(0, 1, 2, 3))
-    val rc42D = new RC4Algorithm(Array(2, 5), Array(0, 1, 2, 3))
     var encrypted = rc42.encryption("hi")
     println(encrypted)
-    println(rc42D.decryption(encrypted))
+    println(rc42.decryption(encrypted))
     //Beto es jo..ven
   }
 }
